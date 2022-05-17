@@ -11,6 +11,7 @@ struct ContentView: View {
     @State private var redColor = 100.0
     @State private var greenColor = 100.0
     @State private var blueColor = 100.0
+    @FocusState private var focusedField: Bool
     
     
     
@@ -25,9 +26,16 @@ struct ContentView: View {
             )
             .cornerRadius(30)
             .padding()
-            SliderView(value: $redColor, sliderColor: .red)
-            SliderView(value: $greenColor, sliderColor: .green)
-            SliderView(value: $blueColor, sliderColor: .blue)
+            SliderView(value: $redColor, sliderColor: .red, focusState: $focusedField)
+            SliderView(value: $greenColor, sliderColor: .green, focusState: $focusedField)
+            SliderView(value: $blueColor, sliderColor: .blue, focusState: $focusedField)
+                .toolbar {
+                    ToolbarItem(placement: .keyboard) {
+                        Button("Done"){
+                            focusedField = false
+                        }
+                        }
+                    }
             Spacer()
         }
     }
